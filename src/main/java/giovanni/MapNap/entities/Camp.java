@@ -21,17 +21,19 @@ public class Camp {
     @Id
     @GeneratedValue
     private UUID id;
-    private int latitude;
-    private int longitude;
+    private String name;
+    private float latitude;
+    private float longitude;
     private String address;
     private String place;
     private String description;
 
-    public Camp(String description, String place, String address, int longitude, int latitude) {
+    public Camp(String description, String place, String address, float longitude, float latitude, String name) {
         this.description = description;
         this.place = place;
         this.address = address;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.name= name;
     }
 }

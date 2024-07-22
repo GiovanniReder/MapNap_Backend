@@ -11,6 +11,6 @@ import java.util.UUID;
 @Repository
 public interface CampRepository extends JpaRepository<Camp, UUID> {
     Optional<Camp> findByPlace(String place);
-    Optional<Camp> findByLatitudeAndLongitude(Integer latitude, Integer longitude);
+    Optional<Camp> findByLatitudeAndLongitude(float latitude, float longitude);
 
 }
