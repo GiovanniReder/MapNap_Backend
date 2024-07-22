@@ -20,6 +20,6 @@ public class CampService {
         }
         Camp newCamp= new Camp(body.description(), body.place(), body.address(), body.longitude(), body.latitude());
 
-        return newCamp;
+        return this.campRepository.save(newCamp);
     }
 }
