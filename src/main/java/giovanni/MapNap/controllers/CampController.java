@@ -1,5 +1,6 @@
 package giovanni.MapNap.controllers;
 
+import giovanni.MapNap.entities.Camp;
 import giovanni.MapNap.exceptions.BadRequestException;
 import giovanni.MapNap.payloads.NewCampDTO;
 import giovanni.MapNap.payloads.NewCampResponseDTO;
@@ -7,6 +8,7 @@ import giovanni.MapNap.payloads.NewUserDTO;
 import giovanni.MapNap.payloads.NewUserResponseDTO;
 import giovanni.MapNap.services.CampService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -27,5 +29,10 @@ public class CampController {
         }
         return new NewCampResponseDTO(this.campService.save(body).getId());
 
+    }
+
+    @GetMapping
+    public Page<Camp> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy){
+        return  this.campService.getAll(page, size, sortBy);
     }
 }
