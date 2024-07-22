@@ -23,13 +23,15 @@ public class Camp {
     private UUID id;
     private int latitude;
     private int longitude;
-    public String address;
-    public String place;
+    private String address;
+    private String place;
     private String description;
 
-    public Camp(int latitude, int longitude, String description) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public Camp(String description, String place, String address, int longitude, int latitude) {
         this.description = description;
+        this.place = place;
+        this.address = address;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 }
