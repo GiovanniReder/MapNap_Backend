@@ -8,8 +8,10 @@ import giovanni.MapNap.exceptions.NotFoundException;
 import giovanni.MapNap.payloads.NewUserDTO;
 import giovanni.MapNap.repositories.UserRepositories;
 import giovanni.MapNap.tools.MailgunSender;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +22,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
-
+@Service
+@Transactional
 public class UserService {
     @Autowired
     private UserRepositories userRepositories;
@@ -34,7 +37,7 @@ public class UserService {
 
 
     public User save(NewUserDTO body) {
-        this.userRepositories.findByEmailorUserName(body.email(), body.userName()).ifPresent(
+        this.userRepositories.findByEmailOrUserName(body.email(), body.userName()).ifPresent(
                 user -> {
                     throw new BadRequestException("Email or username already taken");
                 });
