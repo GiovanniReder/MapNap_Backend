@@ -1,6 +1,6 @@
-package giovanni.MapNap.entities.payloads;
+package giovanni.MapNap.payloads;
 
-import giovanni.MapNap.entities.enums.Role;
+import giovanni.MapNap.enums.Role;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

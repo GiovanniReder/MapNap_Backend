@@ -1,4 +1,4 @@
-package giovanni.MapNap.entities.payloads;
+package giovanni.MapNap.payloads;
 
 import java.util.UUID;
 

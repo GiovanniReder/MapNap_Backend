@@ -17,17 +17,19 @@ import java.util.UUID;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Marker {
+public class Camp {
     @Id
     @GeneratedValue
     private UUID id;
     private int latitude;
     private int longitude;
-    private String text;
+    public String address;
+    public String place;
+    private String description;
 
-    public Marker(int latitude, int longitude, String text) {
+    public Camp(int latitude, int longitude, String description) {
         this.latitude = latitude;
         this.longitude = longitude;
-        this.text = text;
+        this.description = description;
     }
 }

@@ -1,4 +1,4 @@
-package giovanni.MapNap.entities.repositories;
+package giovanni.MapNap.repositories;
 
 import giovanni.MapNap.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
