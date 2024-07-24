@@ -4,6 +4,7 @@ package giovanni.MapNap.payloads;
 import jakarta.validation.constraints.*;
 
 public record NewCampDTO(
+
         @NotEmpty(message = "The name is a mandatory data!")
         @Size( min = 5, max = 100, message = "Address must been between 5 and 100 char! ")
         String name,
@@ -24,9 +25,11 @@ public record NewCampDTO(
         @Size(min = 5, max = 100, message = "Place cannot be longer than 100 characters")
         String place,
 
-        @Size(max = 500, message = "Description cannot be longer than 500 characters")
-        String description
 
+        @Size(max = 500, message = "Description cannot be longer than 500 characters")
+        String description,
+
+        String image
 ) {
 }
 

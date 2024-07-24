@@ -22,7 +22,7 @@ public class CampService {
         if (this.campRepository.findByLatitudeAndLongitude(body.latitude() , body.longitude()).isPresent()){
             throw new BadRequestException("Camp already exist!");
         }
-        Camp newCamp= new Camp(body.description(), body.place(), body.address(), body.longitude(), body.latitude(), body.name());
+        Camp newCamp= new Camp(body.name(), body.latitude(), body.longitude(), body.address(), body.place(), body.description(), body.image());
 
         return this.campRepository.save(newCamp);
     }

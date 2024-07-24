@@ -27,13 +27,15 @@ public class Camp {
     private String address;
     private String place;
     private String description;
+    private String image;
 
-    public Camp(String description, String place, String address, float longitude, float latitude, String name) {
-        this.description = description;
-        this.place = place;
-        this.address = address;
-        this.longitude = longitude;
+    public Camp(String name, float latitude, float longitude, String address, String place, String description, String image) {
+        this.name = name;
         this.latitude = latitude;
-        this.name= name;
+        this.longitude = longitude;
+        this.address = address;
+        this.place = place;
+        this.description = description;
+        this.image = image;
     }
 }
