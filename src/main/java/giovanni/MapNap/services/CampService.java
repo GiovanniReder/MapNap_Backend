@@ -2,6 +2,7 @@ package giovanni.MapNap.services;
 
 import giovanni.MapNap.entities.Camp;
 import giovanni.MapNap.exceptions.BadRequestException;
+import giovanni.MapNap.exceptions.NotFoundException;
 import giovanni.MapNap.payloads.NewCampDTO;
 import giovanni.MapNap.repositories.CampRepository;
 import jakarta.transaction.Transactional;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -31,5 +34,9 @@ public class CampService {
         if(pageSize > 50) pageSize = 50;
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
         return this.campRepository.findAll(pageable);
+    }
+
+    public Camp findById(UUID campId){
+        return campRepository.findById(campId).orElseThrow(() -> new NotFoundException(campId));
     }
 }

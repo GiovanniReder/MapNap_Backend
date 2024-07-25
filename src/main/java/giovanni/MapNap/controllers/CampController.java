@@ -14,6 +14,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/camp")
 public class CampController {
@@ -34,5 +37,10 @@ public class CampController {
     @GetMapping
     public Page<Camp> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy){
         return  this.campService.getAll(page, size, sortBy);
+    }
+
+    @GetMapping("/{campId}")
+    public Optional<Camp>  getCampById(@PathVariable UUID campId) {
+        return Optional.ofNullable(campService.findById(campId));
     }
 }
