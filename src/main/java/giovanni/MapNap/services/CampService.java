@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -38,5 +39,8 @@ public class CampService {
 
     public Camp findById(UUID campId){
         return campRepository.findById(campId).orElseThrow(() -> new NotFoundException(campId));
+    }
+    public List<Camp> findByPlace(String searchedPlace){
+        return campRepository.findByPlace(searchedPlace);
     }
 }

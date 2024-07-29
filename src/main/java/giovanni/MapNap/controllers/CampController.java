@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -42,5 +43,9 @@ public class CampController {
     @GetMapping("/{campId}")
     public Optional<Camp>  getCampById(@PathVariable UUID campId) {
         return Optional.ofNullable(campService.findById(campId));
+    }
+    @GetMapping("/location/{place}")
+    public Optional<List<Camp>>  getCampsByPlace(@PathVariable String place) {
+        return Optional.ofNullable(campService.findByPlace(place));
     }
 }
