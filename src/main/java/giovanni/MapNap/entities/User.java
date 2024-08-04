@@ -40,7 +40,7 @@ public class User implements UserDetails {
         this.name = name;
         this.surname = surname;
         this.avatar = "https://ui-avatars.com/api/?name=" + this.name + "+" + this.surname;
-        this.roles = Role.ADMIN;
+        this.roles = Role.USER;
     }
 
     @Override
