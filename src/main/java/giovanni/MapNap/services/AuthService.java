@@ -17,10 +17,10 @@ public class AuthService {
     @Autowired
     private JWTTools jwtTools;
 
-    public String authenticateUserAndGenerateToken(UserLoginDTO payload){
+    public User authenticateUserAndGenerateToken(UserLoginDTO payload){
         User found = userService.findByEmail(payload.email());
         if (bcrypt.matches(payload.password(), found.getPassword())){
-            return jwtTools.createToken(found);
+            return found;
         } else {
             throw new UnauthorizedException("Wrong Credentials!");
         }

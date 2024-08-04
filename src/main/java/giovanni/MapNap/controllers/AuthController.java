@@ -1,10 +1,12 @@
 package giovanni.MapNap.controllers;
 
+import giovanni.MapNap.entities.User;
 import giovanni.MapNap.exceptions.BadRequestException;
 import giovanni.MapNap.payloads.NewUserDTO;
 import giovanni.MapNap.payloads.NewUserResponseDTO;
 import giovanni.MapNap.payloads.UserLoginDTO;
 import giovanni.MapNap.payloads.UserLoginResponseDTO;
+import giovanni.MapNap.security.JWTTools;
 import giovanni.MapNap.services.AuthService;
 import giovanni.MapNap.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class AuthController {
     private UserService userService;
     @Autowired
     private AuthService authService;
+    @Autowired
+    private JWTTools jwtTools;
 
 
     // http://localhost:3001/auth/register
@@ -42,6 +46,11 @@ public class AuthController {
             System.out.println(validationResult.getAllErrors());
             throw new BadRequestException(validationResult.getAllErrors());
         }
-        return new UserLoginResponseDTO(this.authService.authenticateUserAndGenerateToken(body));
+
+        User authenticatedUser = this.authService.authenticateUserAndGenerateToken(body);
+        String token = jwtTools.createToken(authenticatedUser);
+        return new UserLoginResponseDTO(token, authenticatedUser.getName());
     }
+
+
 }
