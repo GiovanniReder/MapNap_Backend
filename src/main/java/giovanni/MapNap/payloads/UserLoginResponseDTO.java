@@ -1,4 +1,4 @@
 package giovanni.MapNap.payloads;
 
-public record UserLoginResponseDTO(String accessToken, String name) {
+public record UserLoginResponseDTO(String accessToken, String name, String avatar) {
 }

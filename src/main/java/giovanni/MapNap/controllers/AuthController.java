@@ -41,15 +41,14 @@ public class AuthController {
 
     //LOGIN  http://localhost:3001/auth/login
     @PostMapping("/login")
-    public UserLoginResponseDTO login(@RequestBody @Validated UserLoginDTO body, BindingResult validationResult){
+    public UserLoginResponseDTO login(@RequestBody @Validated UserLoginDTO body, BindingResult validationResult) {
         if (validationResult.hasErrors()) {
             System.out.println(validationResult.getAllErrors());
             throw new BadRequestException(validationResult.getAllErrors());
         }
-
-        User authenticatedUser = this.authService.authenticateUserAndGenerateToken(body);
+        User authenticatedUser = authService.authenticateUserAndGenerateToken(body);
         String token = jwtTools.createToken(authenticatedUser);
-        return new UserLoginResponseDTO(token, authenticatedUser.getName());
+        return new UserLoginResponseDTO(token, authenticatedUser.getName(), authenticatedUser.getAvatar());
     }
 
 
