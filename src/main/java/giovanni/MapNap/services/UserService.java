@@ -65,6 +65,26 @@ public class UserService {
         return userRepositories.save(user);
     }
 
+    public User patchNameUtente(User user, String name){
+        user.setName(name);
+        return userRepositories.save(user);
+    }
+
+    public User patchSurnameUtente(User user, String surname){
+        user.setSurname(surname);
+        return userRepositories.save(user);
+    }
+
+    public User patchEmailUtente(User user, String email){
+        user.setEmail(email);
+        return userRepositories.save(user);
+    }
+
+    public User patchPasswordUtente(User user, String password){
+        user.setPassword(password);
+        return userRepositories.save(user);
+    }
+
     public User getUserById(UUID id) {
         return userRepositories.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
@@ -74,5 +94,29 @@ public class UserService {
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
         return this.userRepositories.findAll(pageable);
     }
+
+    public NewUserDTO updateUser(UUID userId, NewUserDTO body) {
+        User found = this.getUserById(userId);
+
+        found.setName(body.name());
+        found.setSurname(body.surname());
+        found.setEmail(body.email());
+        found.setPassword(body.password());
+        found.setRoles(body.role());
+        found.setUserName(body.userName());
+
+        return new NewUserDTO(
+                found.getName(),
+                found.getSurname(),
+                found.getEmail(),
+                found.getPassword(),
+                found.getUsername(),
+                found.getRoles()
+        );
+    }
+
+
+
+
 
 }
