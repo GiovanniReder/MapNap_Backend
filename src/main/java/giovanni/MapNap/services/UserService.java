@@ -37,11 +37,11 @@ public class UserService {
 
 
     public User save(NewUserDTO body) {
-        this.userRepositories.findByEmailOrUserName(body.email(), body.userName()).ifPresent(
+        this.userRepositories.findByEmailOrUserName(body.email(), body.username()).ifPresent(
                 user -> {
                     throw new BadRequestException("Email or username already taken");
                 });
-        User newUser = new User(body.userName(), body.email(), bcrypt.encode(body.password()), body.name(), body.surname() );
+        User newUser = new User(body.username(), body.email(), bcrypt.encode(body.password()), body.name(), body.surname() );
 
         userRepositories.save(newUser);
         mailgunSender.sendRegistrationEmail(newUser);
@@ -65,10 +65,17 @@ public class UserService {
         return userRepositories.save(user);
     }
 
-    public User patchNameUtente(User user, String name){
+    public User patchUser(UUID utenteId, String name, String surname, String email, String password) {
+        User user = userRepositories.findById(utenteId)
+                .orElseThrow(() -> new NotFoundException("User not found with id: " + utenteId));
         user.setName(name);
+        user.setSurname(surname);
+        user.setEmail(email);
+        user.setPassword(password);
+
         return userRepositories.save(user);
     }
+
 
     public User patchSurnameUtente(User user, String surname){
         user.setSurname(surname);
@@ -103,7 +110,7 @@ public class UserService {
         found.setEmail(body.email());
         found.setPassword(body.password());
         found.setRoles(body.role());
-        found.setUserName(body.userName());
+        found.setUserName(body.username());
 
         return new NewUserDTO(
                 found.getName(),
