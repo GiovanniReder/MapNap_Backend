@@ -1,4 +1,6 @@
 package giovanni.MapNap.payloads;
 
-public record UserLoginResponseDTO(String accessToken, String name, String avatar) {
+import java.util.UUID;
+
+public record UserLoginResponseDTO(String accessToken, String name, String avatar, UUID userId) {
 }
