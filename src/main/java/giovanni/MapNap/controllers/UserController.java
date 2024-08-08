@@ -2,7 +2,10 @@ package giovanni.MapNap.controllers;
 
 import giovanni.MapNap.entities.User;
 import giovanni.MapNap.exceptions.BadRequestException;
+import giovanni.MapNap.exceptions.NotFoundException;
 import giovanni.MapNap.payloads.NewUserDTO;
+import giovanni.MapNap.payloads.UpdateAvatarDTO;
+import giovanni.MapNap.payloads.UpdateAvatarResponseDTO;
 import giovanni.MapNap.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,8 +46,28 @@ public class UserController {
                 body.email(),
                 bcrypt.encode(body.password())
 
+
         );
+
         return ResponseEntity.ok(updatedUser);
     }
 
+
+    @PutMapping("/{userId}/avatar")
+    public ResponseEntity<UpdateAvatarResponseDTO> updateAvatar(@PathVariable UUID userId, @RequestBody UpdateAvatarDTO request) {
+        User user = userService.findById(userId);
+        if (user == null) {
+            throw new NotFoundException("User with id " + userId + " not found!");
+        }
+
+
+        User updatedUser = userService.patchAvatarUtente(user, request.url());
+        String updatedAvatarUrl = request.url();
+
+        return ResponseEntity.ok(new UpdateAvatarResponseDTO(updatedAvatarUrl));
+    }
+
+
+
 }
+
