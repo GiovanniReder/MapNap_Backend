@@ -36,7 +36,7 @@ public class CampController {
     }
 
     @GetMapping
-    public Page<Camp> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy){
+    public Page<Camp> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "100") int size, @RequestParam(defaultValue = "id") String sortBy){
         return  this.campService.getAll(page, size, sortBy);
     }
 
