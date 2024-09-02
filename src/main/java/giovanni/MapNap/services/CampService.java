@@ -31,10 +31,8 @@ public class CampService {
         return this.campRepository.save(newCamp);
     }
 
-    public Page<Camp> getAll(int pageNumber, int pageSize, String sortBy){
-        if(pageSize > 50) pageSize = 50;
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy));
-        return this.campRepository.findAll(pageable);
+    public List<Camp> getAll(String sortBy) {
+        return campRepository.findAll(Sort.by(sortBy));
     }
 
     public Camp findById(UUID campId){
