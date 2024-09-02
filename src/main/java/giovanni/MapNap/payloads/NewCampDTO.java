@@ -22,7 +22,7 @@ public record NewCampDTO(
         String address,
 
         @NotEmpty(message = "The place is a mandatory data!")
-        @Size(min = 5, max = 100, message = "Place cannot be longer than 100 characters")
+        @Size(min = 2, max = 100, message = "Place cannot be longer than 100 characters")
         String place,
 
 
